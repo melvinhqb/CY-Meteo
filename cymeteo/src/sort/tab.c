@@ -11,18 +11,18 @@ Node* insertNodeTAB(Node* root, Data packet, float data, sort_by sort_by) {
     Node* p1 = NULL;
 
     // If root is NULL or the value of the new node is less than the value of the first chainon
-    if (root == NULL || getSortData(root->data, sort_by) >= data) {
-        new->left = root;
+    if (root == NULL || getSortData(root->data, sort_by) > data) {
+        new->right = root;
         root = new;
     }
     else {
         p1 = root;
-        // Loop as long as the value of the link is smaller than the new nod
-        while (p1->left != NULL && getSortData(p1->left->data, sort_by) < data) {
-            p1 = p1->left;
+        // Loop as long as the value of the current node is smaller equal the new node
+        while (p1->right != NULL && getSortData(p1->right->data, sort_by) <= data) {
+            p1 = p1->right;
         }
-        new->left = p1->left;
-        p1->left = new;
+        new->right = p1->right;
+        p1->right = new;
     }
     
     // Return the root of the tab
